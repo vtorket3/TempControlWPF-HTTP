@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Температура</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.0/signalr.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-top: 0;
+            border-bottom: 2px solid #f0f4f8;
+            padding-bottom: 15px;
+        }
+
+        #list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            #list li {
+                background: #f8f9fa;
+                margin: 10px 0;
+                padding: 12px;
+                border-radius: 10px;
+                display: flex;
+                justify-content: space-between;
+                transition: transform 0.2s;
+                border-left: 4px solid #2a5298;
+            }
+
+                #list li:hover {
+                    transform: scale(1.02);
+                    background: #eef2f7;
+                }
+
+        .temp {
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .time {
+            font-size: 0.85rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Последние данные</h2>
+        <ul id="list">
+        </ul>
+    </div>
+
+    <script>const connection = new signalR.HubConnectionBuilder()
+            .withUrl("https://localhost:5001/temperatureHub")
+            .build();
+
+        connection.on("ReceiveData", data => {
+            const list = document.getElementById("list");
+            list.innerHTML = "";
+
+            data.forEach(item => {
+                const li = document.createElement("li");
+                li.innerHTML = `
+                    <span class="temp">${item.temperature} °C</span>
+                    <span class="time">${new Date(item.timestamp).toLocaleTimeString()}</span>
+                `;
+                list.appendChild(li);
+            });
+        });
+
+        connection.start()
+            .then(() => console.log("Подключено"))
+            .catch(err => console.error(err));</script>
+</body>
+</html>

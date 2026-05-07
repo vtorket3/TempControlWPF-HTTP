@@ -1,0 +1,2 @@
+wwwroot\index.html
+C:\Users\DIMA\source\repos\TemperatureServer\TemperatureServer\wwwroot\index.html

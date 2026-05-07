@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "9qLWTtn6lU0=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\DIMA\\source\\repos\\TemperatureServer\\TemperatureServer\\TemperatureServer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\DIMA\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.12\\microsoft.aspnetcore.openapi.9.0.12.nupkg.sha512",
+    "C:\\Users\\DIMA\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
